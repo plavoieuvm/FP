@@ -2,6 +2,7 @@ from individual_pro import INDIVIDUAL
 import copy
 import random
 import constants_pro as c
+import pickle
 
 
 class POPULATION:
@@ -11,6 +12,12 @@ class POPULATION:
         self.p = {}
         self.popSize = popSize
 
+
+    def Reset(self):
+
+
+        for i in self.p:
+            self.p[i].fitness = 0
 
     def Initialize(self):
 
@@ -91,6 +98,26 @@ class POPULATION:
             if self.p[i].fitness < other.p[i].fitness:
 
                 self.p[i] = other.p[i]
+
+
+    def LookForNewBest(self, other, g):
+
+        for i in self.p:
+
+            if (self.p[i].fitness < other.p[i].fitness) and (i == 0):
+
+                name = "robot_" + str(g) + ".p"
+                f = open(name, "wb")
+
+                pickle.dump(self.p[i], f)
+
+                f.close()
+
+
+
+
+
+
 
 
 

@@ -2,7 +2,8 @@ import random
 import math
 import pyrosim
 #from robot_pro import ROBOT
-from robot_pro2 import ROBOT
+#from robot_pro2 import ROBOT   # NO FEET
+from robot_pro2_0 import ROBOT
 import numpy
 import constants_pro as c
 
@@ -48,7 +49,7 @@ class INDIVIDUAL:
         orienX = self.sim.get_sensor_data(sensor_id=self.robot.veS, svi=0)
 
 
-        self.fitness = x[-1] - (orienX[-1] * 2)
+        self.fitness = x[-1] - (orienX[-1])
 
 
         del self.sim

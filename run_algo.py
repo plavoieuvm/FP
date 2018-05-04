@@ -1,38 +1,67 @@
 from population_pro import POPULATION
 import constants_pro as c
 import time
+import matplotlib.pyplot as plt
+import pickle
 
 parents = POPULATION(c.popSize)
 
 parents.Initialize()
 
-parents.Evaluate(pb=True, pp=False)
+parents.Evaluate(pb=False, pp=True)
 
 print "0",
 parents.Print()
 
 start_time = time.time()
 
-g=0
-while (time.time() - start_time) < 120:
+fitnesses = []
 
-#for g in range(1, c.numGens):
+fitnesses.append(parents.p[0].fitness)
 
-    g = g + 1
+# g=0
+# while (time.time() - start_time) < 20:
+#
+# #for g in range(1, c.numGens):
+#
+#     g = g + 1
+#
+#     children = POPULATION(c.popSize)
+#
+#     children.Fill_From(parents)
+#
+#     children.Evaluate(pp=False, pb=True)
+#
+#     fitnesses.append(parents.p[0].fitness)
+#
+#     print g,
+#     children.Print()
+#
+#     #children.Reset()
+#
+#     parents.LookForNewBest(children, g)
+#
+#     parents.ReplaceWith(children)
 
-    children = POPULATION(c.popSize)
 
-    children.Fill_From(parents)
+# parents.p[0].Start_Evaluation(pb=False, pp=True)
 
-    children.Evaluate(pp=False, pb=True)
-
-    print g,
-    children.Print()
-
-    parents.ReplaceWith(children)
-
-
-
-parents.p[0].Start_Evaluation(pb=False, pp=True)
-
+# # pickle.dump(fitnesses, open('fitnesses_test.p', 'wb'))
+#
+# # print fitnesses
+#
+# f = plt.figure()
+#
+# panel = f.add_subplot(111)
+#
+# plt.plot(fitnesses)
+#
+# plt.title('Fitness Curve (w/ Evolution')
+# plt.ylabel('Fitness')
+# plt.xlabel('Generations')
+#
+#
+# # panel.set_ylim(-1, +2)
+#
+# plt.show()
 
