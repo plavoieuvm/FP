@@ -26,12 +26,12 @@ class ROBOT:
 
         for i in range(0, 30, 4):
 
-            sim.send_cylinder(x=0.040*i, y=0, z=.018, length=1, radius=.018, r1=0, r2=1, r3=0, r=1.0, g=0, b=0,
+            sim.send_cylinder(x=0.040*i, y=0, z=.018, length=1.5, radius=.018, r1=0, r2=1, r3=0, r=1.0, g=0, b=0,
                                          collision_group='env')
 
             if i != 0:
 
-                sim.send_cylinder(x=0.040*-i, y=0, z=.018, length=1, radius=.018, r1=0, r2=1, r3=0, r=1.0, g=0, b=0,
+                sim.send_cylinder(x=0.040*-i, y=0, z=.018, length=1.5, radius=.018, r1=0, r2=1, r3=0, r=1.0, g=0, b=0,
                                              collision_group='env')
 
 
@@ -89,6 +89,10 @@ class ROBOT:
 
         self.foot1 = sim.send_box(x=0, y=(3*c.L)+(c.R*2)-(.07/2), z=(0.018*2)+.01, length=.07, width=.35, height=.01, collision_group='rob')
         self.foot2 = sim.send_box(x=0, y=(3*-c.L)-(c.R*2)+(.07/2), z=(0.018*2)+.01, length=.07, width=.35, height=.01, collision_group='rob')
+
+        #self.foot1 = sim.send_box(x=0, y=(3*c.L)+(c.R*2)-(.07/2), z=(0.018*2)+.01, length=.07, width=.35, height=.01, collision_group='rob')
+        #self.foot2 = sim.send_box(x=0, y=(3*-c.L)-(c.R*2)+(.07/2), z=(0.018*2)+.01, length=.07, width=.35, height=.01, collision_group='rob')
+
 
         # self.body = sim.send_box(x=0, y=0, z=c.LR2 + c.RR2, length=0.2, width=0.2, height=0.05, collision_group='rob')
 
@@ -178,16 +182,16 @@ class ROBOT:
         #                                z=.05/2, n1=0, n2=1, n3=0, lo=-3.14159 / 4, hi=3.14159 / 4)
 
 
-        self.jointbody1 = sim.send_hinge_joint(first_body_id=self.leg1, second_body_id=self.body, x=0, y=-c.L/2,
-                                       z=c.L +.018+.02, n1=0, n2=1, n3=0, lo=-3.14159/2, hi=3.14159/2)
+        self.jointbody1 = sim.send_hinge_joint(first_body_id=self.leg1, second_body_id=self.body, x=0, y=c.L/2,
+                                       z=c.L +.018+.02, n1=1, n2=0, n3=0, lo=-0.174533, hi=0.174533)
 
-        self.jointbody2 = sim.send_hinge_joint(first_body_id=self.leg2, second_body_id=self.body, x=c.L/2, y=c.L/2,
+        self.jointbody2 = sim.send_hinge_joint(first_body_id=self.leg2, second_body_id=self.body, x=c.L/2, y=0,
                                        z=c.L +.018+.02, n1=0, n2=1, n3=0, lo=-3.14159 /2, hi=3.14159/2)
 
-        self.jointbody3 = sim.send_hinge_joint(first_body_id=self.leg3, second_body_id=self.body, x=0, y=c.L/2,
-                                       z=c.L +.018+.02, n1=0, n2=1, n3=0, lo=-3.14159 /2, hi=3.14159/2)
+        self.jointbody3 = sim.send_hinge_joint(first_body_id=self.leg3, second_body_id=self.body, x=0, y=-c.L/2,
+                                       z=c.L +.018+.02, n1=1, n2=0, n3=0, lo=-0.174533, hi=0.174533)
 
-        self.jointbody4 = sim.send_hinge_joint(first_body_id=self.leg4, second_body_id=self.body, x=-c.R, y=c.L/2,
+        self.jointbody4 = sim.send_hinge_joint(first_body_id=self.leg4, second_body_id=self.body, x=-c.R, y=0,
                                        z=c.L +.018+.02, n1=0, n2=1, n3=0, lo=-3.14159 /2, hi=3.14159/2)
 
 
@@ -203,13 +207,13 @@ class ROBOT:
 
 
         self.jointa1 = sim.send_hinge_joint(first_body_id=self.leg5, second_body_id=self.leg9, x=0, y=(2*c.L)+c.R,
-                                       z=c.L+.018+.02, n1=0, n2=1, n3=0, lo=-3.14159/2, hi=3.14159/2)
+                                       z=c.L+.018+.02, n1=1, n2=0, n3=0, lo=-3.14159/2, hi=3.14159/2)
 
         self.jointa2 = sim.send_hinge_joint(first_body_id=self.leg6, second_body_id=self.leg10, x=(2*c.L)+c.R, y=0,
                                        z=c.L+.018+.02, n1=0, n2=1, n3=0, lo=-3.14159/2, hi=3.14159/2)
 
         self.jointa3 = sim.send_hinge_joint(first_body_id=self.leg7, second_body_id=self.leg11, x=0, y=-(2*c.L)-c.R,
-                                       z=c.L+.018+.02, n1=0, n2=1, n3=0, lo=-3.14159/2, hi=3.14159/2)
+                                       z=c.L+.018+.02, n1=1, n2=0, n3=0, lo=-3.14159/2, hi=3.14159/2)
 
         self.jointa4 = sim.send_hinge_joint(first_body_id=self.leg8, second_body_id=self.leg12, x=-(2*c.L)-c.R, y=0,
                                        z=c.L+.018+.02, n1=0, n2=1, n3=0, lo=-3.14159/2, hi=3.14159/2)
@@ -219,9 +223,9 @@ class ROBOT:
 
 
         self.foot1J = sim.send_hinge_joint(first_body_id=self.leg9, second_body_id=self.foot1, x=0, y=(3*c.L)+(c.R*2)-(.07/2),
-                                           z=(0.018*2)+.01, n1=0, n2=1, n3=1, lo=-3.14159/2, hi=3.14150/2)
+                                           z=(0.018*2)+.01, n1=1, n2=0, n3=1, lo=-3.14159/2, hi=3.14150/2)
         self.foot2J = sim.send_hinge_joint(first_body_id=self.leg11, second_body_id=self.foot2, x=0, y=(3*-c.L)-(c.R*2)+(.07/2),
-                                           z=(0.018*2)+.01, n1=0, n2=1, n3=1, lo=-3.14159/2, hi=3.14150/2)
+                                           z=(0.018*2)+.01, n1=1, n2=0, n3=1, lo=-3.14159/2, hi=3.14150/2)
         #
 
 
